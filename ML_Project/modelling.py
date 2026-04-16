@@ -11,7 +11,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 
 # Inisialisasi DagsHub
-dagshub.init(repo_owner='waryuu', repo_name='Eksperimen_SML_Wahyudi-Putra', mlflow=True)
+mlflow.set_tracking_uri("https://dagshub.com/waryuu/Eksperimen_SML_Wahyudi-Putra.mlflow")
+# dagshub.init(repo_owner='waryuu', repo_name='Eksperimen_SML_Wahyudi-Putra', mlflow=True)
 
 
 def run_tuning_modelling():
