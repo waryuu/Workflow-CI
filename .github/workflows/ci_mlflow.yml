@@ -34,11 +34,11 @@ jobs:
 
     - name: Run mlflow project
         run: |
-          mlflow run MLproject --env-manager=local
+          mlflow run MLProject --env-manager=local
 
     - name: Get latest MLflow run_id
-       run: |
-          RUN_ID=$(ls -td mlruns/0/*/ | head -n 1 | cut -d'/' -f3)
+        run: |
+          RUN_ID=$(ls -t mlruns/0 | grep -v "meta.yaml" | head -n 1)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
           echo "Latest run_id: $RUN_ID"
           
@@ -51,18 +51,18 @@ jobs:
 
     - name: Build Docker Model
         run: |
-          mlflow models build-docker --model-uri "runs:/$RUN_ID/model" --name "cc"
+          mlflow models build-docker -m "runs:/$RUN_ID/best_random_forest_model" -n "pl-model" --enable-mlserver
 
     - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Tag Docker Image
         run: |
-          docker tag cc ${{ secrets.DOCKER_HUB_USERNAME }}/cc:latest
+          docker tag pl-model ${{ secrets.DOCKER_USERNAME }}/pl-model:latest
 
-    -name: Push Docker Image
+    - name: Push Docker Image
         run: |
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/cc:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/pl-model:latest
