@@ -1,4 +1,4 @@
-name: Premier_League_Retraining
+name: Premier_League_Tuning
 
 conda_env: conda.yaml
 

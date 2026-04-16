@@ -24,7 +24,7 @@ def run_tuning_modelling():
 
     # 3. Setup Tracking
     # dagshub.init(repo_owner='waryuu', repo_name='Eksperimen_SML_Wahyudi-Putra', mlflow=True)
-    mlflow.set_experiment("Premier_League_Tuning_Experiment")
+    # mlflow.set_experiment("Premier_League_Tuning_Experiment")
 
     # 4. Training dengan Hyperparameter Tuning
     with mlflow.start_run(run_name="RF_Manual_Tuning_Final"):
