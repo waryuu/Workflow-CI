@@ -38,7 +38,7 @@ jobs:
 
     - name: Get latest MLflow run_id
       run: |
-        RUN_ID=$(ls -t MLProject/mlruns/0 | grep -v "meta.yaml" | head -n 1)
+        RUN_ID=$(ls -t mlruns/0 | grep -v "meta.yaml" | head -n 1)
         echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
         echo "Latest run_id: $RUN_ID"
           
@@ -47,7 +47,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: trained-model
-        path: MLProject/mlruns/
+        path: mlruns/
 
     - name: Build Docker Model
       run: |
