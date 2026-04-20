@@ -10,6 +10,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 def run_tuning_modelling():
     PATH_DATA = 'premier_league_complete_stats_until31thGameDayOnSeason2025-26_preprocessing.csv'
+    mlflow.set_tracking_uri("file:./MLProject/mlruns")
     
     # 1. Validasi dataset
     if not os.path.exists(PATH_DATA):
